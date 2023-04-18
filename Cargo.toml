@@ -1,0 +1,25 @@
+[package]
+name = "webterm-server"
+description = "webterminal server using hyper and xterm.js"
+version = "0.1.0"
+license = "BSD-2-Clause"
+authors = ["Maarten de Vries <maarten@de-vri.es>"]
+readme = "README.md"
+repository = "https://github.com/de-vri-es/webterm-server-rs"
+keywords = ["webterm", "web", "terminal", "xterm", "server"]
+categories = ["developtment-tools", "command-line-utilities"]
+
+edition = "2021"
+
+[dependencies]
+async-shutdown = "0.1.2"
+clap = { version = "4.1.8", features = ["derive"] }
+futures = "0.3.28"
+hyper = { version = "0.14.26", features = ["server", "http1", "http2"] }
+hyper-tungstenite = "0.9.0"
+libc = "0.2.141"
+log = "0.4.17"
+pretty_env_logger = "0.4.0"
+serde = "1.0.104"
+serde_json = "1.0.44"
+tokio = { version = "1.27.0", features = ["macros", "net", "rt-multi-thread", "signal", "process"] }

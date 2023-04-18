@@ -1,0 +1,3 @@
+#!/bin/sh
+read -p "Username: " -r username
+exec su -l "$username"

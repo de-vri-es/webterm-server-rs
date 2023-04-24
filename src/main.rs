@@ -125,6 +125,7 @@ async fn handle_request(request: hyper::Request<hyper::Body>, subcommand: Arc<Su
 		"/xtermjs/xterm.css" => serve_static(include_str!("../static/xtermjs/xterm.css"), "text/css"),
 		"/xtermjs/xterm-addon-fit.js" => serve_static(include_str!("../static/xtermjs/xterm-addon-fit.js"), "text/javascript"),
 		"/xtermjs/xterm-addon-search.js" => serve_static(include_str!("../static/xtermjs/xterm-addon-search.js"), "text/javascript"),
+		"/xtermjs/xterm-addon-webgl.js" => serve_static(include_str!("../static/xtermjs/xterm-addon-webgl.js"), "text/javascript"),
 		"/xtermjs/xterm-addon-web-links.js" => serve_static(include_str!("../static/xtermjs/xterm-addon-web-links.js"), "text/javascript"),
 		"/terminal" => handle_terminal(request, subcommand.clone()).await,
 		_ => not_found(),

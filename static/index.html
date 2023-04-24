@@ -6,6 +6,7 @@
 		<script src="xtermjs/xterm.js"></script>
 		<script src="xtermjs/xterm-addon-fit.js"></script>
 		<script src="xtermjs/xterm-addon-search.js"></script>
+		<script src="xtermjs/xterm-addon-webgl.js"></script>
 		<script src="xtermjs/xterm-addon-web-links.js"></script>
 		<style type="text/css">
 			body {
@@ -23,11 +24,6 @@
 			const term = new Terminal({
 				fontFamily: "monospace",
 			});
-			const protocol = (location.protocol === 'https:' ? 'wss' : 'ws');
-			const port = (location.port ? `:${location.port}` : '');
-			const socketURL = `${protocol}://${location.hostname}${port}/terminal`;
-			const sock = new WebSocket(socketURL);
-			sock.binaryType = "arraybuffer";
 
 			term.loadAddon(new WebLinksAddon.WebLinksAddon());
 
@@ -38,8 +34,24 @@
 			term.loadAddon(fit);
 			fit.fit();
 
+			function enableWebGl() {
+				const webgl = new WebglAddon.WebglAddon();
+				webgl.onContextLoss(() => {
+					webgl.dispose();
+					enableWebGl();
+				});
+				term.loadAddon(webgl);
+			}
+			enableWebGl();
+
 			const D = 0x64;
 			const R = 0x72;
+
+			const protocol = (location.protocol === 'https:' ? 'wss' : 'ws');
+			const port = (location.port ? `:${location.port}` : '');
+			const socketURL = `${protocol}://${location.hostname}${port}/terminal`;
+			const sock = new WebSocket(socketURL);
+			sock.binaryType = "arraybuffer";
 
 			sock.addEventListener('open', () => {
 				const listeners = [];

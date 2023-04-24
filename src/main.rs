@@ -123,13 +123,9 @@ async fn handle_request(request: hyper::Request<hyper::Body>, subcommand: Arc<Su
 		"/" => serve_static(include_str!("../static/index.html"), "text/html; charset=utf-8"),
 		"/xtermjs/xterm.js" => serve_static(include_str!("../static/xtermjs/xterm.js"), "text/javascript"),
 		"/xtermjs/xterm.css" => serve_static(include_str!("../static/xtermjs/xterm.css"), "text/css"),
-		"/xtermjs/xterm.js.map" => serve_static(include_str!("../static/xtermjs/xterm.js.map"), "application/json"),
 		"/xtermjs/xterm-addon-fit.js" => serve_static(include_str!("../static/xtermjs/xterm-addon-fit.js"), "text/javascript"),
-		"/xtermjs/xterm-addon-fit.js.map" => serve_static(include_str!("../static/xtermjs/xterm-addon-fit.js.map"), "application/json"),
 		"/xtermjs/xterm-addon-search.js" => serve_static(include_str!("../static/xtermjs/xterm-addon-search.js"), "text/javascript"),
-		"/xtermjs/xterm-addon-search.js.map" => serve_static(include_str!("../static/xtermjs/xterm-addon-search.js.map"), "application/json"),
 		"/xtermjs/xterm-addon-web-links.js" => serve_static(include_str!("../static/xtermjs/xterm-addon-web-links.js"), "text/javascript"),
-		"/xtermjs/xterm-addon-web-links.js.map" => serve_static(include_str!("../static/xtermjs/xterm-addon-web-links.js.map"), "application/json"),
 		"/terminal" => handle_terminal(request, subcommand.clone()).await,
 		_ => not_found(),
 	})
